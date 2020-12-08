@@ -215,7 +215,7 @@ $conn -> close();
 	
 	<input type="submit" value="Delete" style="color:green; font-weigt:bold">
 	<?php
-	$stmt = $conn -> prepare("DELETE from labtask3 WHERE id = ?");
+	$stmt = $conn -> prepare("DELETE * from labtask3 WHERE id = ?");
 $stmt -> bind_param("i", $id);
 
 $id = 3;
