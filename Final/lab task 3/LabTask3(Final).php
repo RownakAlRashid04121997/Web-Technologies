@@ -59,21 +59,13 @@
         }
 		
 		if (isset($_POST["DOB"]) & !empty($_POST["DOB"])) {
-        $email = test_input($_POST["DOB"]);
+        $DOB = test_input($_POST["DOB"]);
         }
       else {
         $DOBError= "Invalid DOB";
         $counter = $counter + 1;
         }
-		
-
-  if (isset($_POST["gender"]) & !empty($_POST["gender"])) {
-    $gender = test_input($_POST["gender"]);
-  }
-  else {
-    $genderError = "Invalid Email";
-    $counter = $counter + 1;
-  }
+	
 
   if (isset($_POST["password"]) & !empty($_POST["password"])) {
     $password = test_input($_POST["password"]);
