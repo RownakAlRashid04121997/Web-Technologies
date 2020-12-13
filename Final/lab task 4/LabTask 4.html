@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Lab task 4(Final) </title>
+			<script>
+			function validate() {
+				var x = document.getElementById('id').value;
+				
+				if(x == "") {
+					document.getElementById('errorMsg').innerHTML = "id is empty";
+					document.getElementById('errorMsg').style.color = "red";
+					return false;	
+				}else{ return true; }
+				
+				
+				var y = document.getElementById('UserName').value;
+				
+				if(y == "") {
+					document.getElementById('errorMsg').innerHTML = "UserName is empty";
+					document.getElementById('errorMsg').style.color = "red";
+					return false;	
+				}else{ return true; }
+				
+				
+				var a = document.getElementById('email').value;
+				
+				if(a == "") {
+					document.getElementById('errorMsg').innerHTML = "email is empty";
+					document.getElementById('errorMsg').style.color = "red";
+					return false;	
+				}else{ return true; }
+				
+				
+				var b = document.getElementById('DOB').value;
+				
+				if(b == "") {
+					document.getElementById('errorMsg').innerHTML = "DOB is empty";
+					document.getElementById('errorMsg').style.color = "red";
+					return false;	
+				}else{ return true; }
+				
+				
+				var c = document.getElementById('password').value;
+				
+				if(c == "") {
+					document.getElementById('errorMsg').innerHTML = "email is empty";
+					document.getElementById('errorMsg').style.color = "red";
+					return false;	
+				}else{ return true; }
+				
+			}
+		</script>
+</head>
+<body>
+
+    <h2> Insert,Update,Delete </h2>
+
+	
+	
+	
+	
+    <form name="jsForm" action="LT4Validation.php" method="POST" onsubmit="return validate()">
+	
+	Id <br/>
+    <input type="text" name="id" required>
+	<br /><br />
+    <span><?php echo $idError; ?></span><br />
+	
+	 UserName <br/>
+    <input type="text" name="UserName" required>
+	<br /><br />
+    <span><?php echo $UserNameError; ?></span><br />
+	
+	 Date <br/>
+    <input type="text" name="DOB" required>
+	<br /><br />
+    <span><?php echo $DOBError; ?></span><br />
+	
+    
+        
+     Email <br/>
+    <input type="text" name="email" required>
+	<br /><br />
+    <span><?php echo $emailError; ?></span><br />
+    
+    Password  <br/>
+    <input type="text" name="password" required style=" width:333px">
+	<span><?php echo $passwordError; ?></span><br />
+	<br /> 
+
+
+	<br /><br />
+	<input type="submit" value="Insert" style="color:green; font-weigt:bold">
+	<?php
+	
+	$stmt = $conn -> prepare("INSERT INTO  labtask3(id,username,email,password,dob) VALUES (? ,?)");
+$stmt -> bind_param("issss",$id, $UserName, $email, $password, $DOB);
+
+//$id = id;
+//$fullName = "ghi";
+$stmt -> execute();
+
+//$id = 7;
+//$fullName = "mno";
+//$stmt -> execute();
+
+echo "<h4>Records Inserted Successfully</h4>";
+//$stmt -> close();
+
+$sql = "SELECT id, username FROM labtask3"; // Query
+$result = $conn -> query($sql); // result set
+
+if($result->num_rows > 0) {
+	// show result
+	echo "<p>Result is more than zero</p>";
+	echo "<br>";
+
+	echo "<ol>";
+	while($row = $result -> fetch_assoc()) {
+		echo "<li>id: " . $row['id'] . " " . "username: " . $row['username'] .   " " . "email: " . $row['email'] . "</li>";
+	}
+	echo "</ol>";
+
+}
+else {
+	echo "<p>Result is zero</p>";
+}
+
+$conn -> close();
+	?>
+	
+	
+		<input type="submit" value="Update" style="color:green; font-weigt:bold">
+	<?php
+	
+	$stmt = $conn -> prepare("UPDATE labtask3 SET username = ? WHERE id = ?");
+$stmt -> bind_param("si", $UserName, $id);
+
+//$id = 6;
+//$fullName = "round";
+$stmt -> execute();
+
+echo "<h4>Records Updated Successfully</h4>";
+$stmt -> close();
+
+$sql = "SELECT id, Fullname FROM labtask3"; // Query
+$result = $conn -> query($sql); // result set
+
+if($result->num_rows > 0) {
+	// show result
+	echo "<p>Result is more than zero</p>";
+	echo "<br>";
+
+	echo "<ol>";
+	while($row = $result -> fetch_assoc()) {
+		echo "<li>id: " . $row['id'] . " " . "username: " . $row['username'] .   " " . "email: " . $row['email'] . "</li>";
+	}
+	echo "</ol>";
+
+}
+else {
+	echo "<p>Result is zero</p>";
+}
+
+$conn -> close();
+
+
+	?>
+	
+	
+	<input type="submit" value="Delete" style="color:green; font-weigt:bold">
+	<?php
+	$stmt = $conn -> prepare("DELETE from labtask3 WHERE id = ?");
+$stmt -> bind_param("i", $id);
+
+$id = 3;
+$stmt -> execute();
+
+echo "<h4>Records Deleted Successfully</h4>";
+$stmt -> close();
+
+$sql = "SELECT id, Fullname FROM Users"; // Query
+$result = $conn -> query($sql); // result set
+
+if($result->num_rows > 0) {
+	// show result
+	echo "<p>Result is more than zero</p>";
+	echo "<br>";
+
+	echo "<ol>";
+	while($row = $result -> fetch_assoc()) {
+		echo "<li>id: " . $row['id'] . " " . "username: " . $row['username'] .   " " . "email: " . $row['email'] . "</li>";
+	}
+	echo "</ol>";
+
+}
+else {
+	echo "<p>Result is zero</p>";
+}
+
+
+$conn -> close();
+
+
+	?>
+
+	</form>
+	
+   <p id="errorMsg"></p>
+</body>
+</html>
+
+
+
+
+
