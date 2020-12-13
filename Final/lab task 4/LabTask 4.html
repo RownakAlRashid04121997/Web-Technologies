@@ -91,118 +91,15 @@
 
 	<br /><br />
 	<input type="submit" value="Insert" style="color:green; font-weigt:bold">
-	<?php
 	
-	$stmt = $conn -> prepare("INSERT INTO  labtask3(id,username,email,password,dob) VALUES (? ,?)");
-$stmt -> bind_param("issss",$id, $UserName, $email, $password, $DOB);
-
-//$id = id;
-//$fullName = "ghi";
-$stmt -> execute();
-
-//$id = 7;
-//$fullName = "mno";
-//$stmt -> execute();
-
-echo "<h4>Records Inserted Successfully</h4>";
-//$stmt -> close();
-
-$sql = "SELECT id, username FROM labtask3"; // Query
-$result = $conn -> query($sql); // result set
-
-if($result->num_rows > 0) {
-	// show result
-	echo "<p>Result is more than zero</p>";
-	echo "<br>";
-
-	echo "<ol>";
-	while($row = $result -> fetch_assoc()) {
-		echo "<li>id: " . $row['id'] . " " . "username: " . $row['username'] .   " " . "email: " . $row['email'] . "</li>";
-	}
-	echo "</ol>";
-
-}
-else {
-	echo "<p>Result is zero</p>";
-}
-
-$conn -> close();
-	?>
 	
 	
 		<input type="submit" value="Update" style="color:green; font-weigt:bold">
-	<?php
 	
-	$stmt = $conn -> prepare("UPDATE labtask3 SET username = ? WHERE id = ?");
-$stmt -> bind_param("si", $UserName, $id);
-
-//$id = 6;
-//$fullName = "round";
-$stmt -> execute();
-
-echo "<h4>Records Updated Successfully</h4>";
-$stmt -> close();
-
-$sql = "SELECT id, Fullname FROM labtask3"; // Query
-$result = $conn -> query($sql); // result set
-
-if($result->num_rows > 0) {
-	// show result
-	echo "<p>Result is more than zero</p>";
-	echo "<br>";
-
-	echo "<ol>";
-	while($row = $result -> fetch_assoc()) {
-		echo "<li>id: " . $row['id'] . " " . "username: " . $row['username'] .   " " . "email: " . $row['email'] . "</li>";
-	}
-	echo "</ol>";
-
-}
-else {
-	echo "<p>Result is zero</p>";
-}
-
-$conn -> close();
-
-
-	?>
 	
 	
 	<input type="submit" value="Delete" style="color:green; font-weigt:bold">
-	<?php
-	$stmt = $conn -> prepare("DELETE from labtask3 WHERE id = ?");
-$stmt -> bind_param("i", $id);
-
-$id = 3;
-$stmt -> execute();
-
-echo "<h4>Records Deleted Successfully</h4>";
-$stmt -> close();
-
-$sql = "SELECT id, Fullname FROM Users"; // Query
-$result = $conn -> query($sql); // result set
-
-if($result->num_rows > 0) {
-	// show result
-	echo "<p>Result is more than zero</p>";
-	echo "<br>";
-
-	echo "<ol>";
-	while($row = $result -> fetch_assoc()) {
-		echo "<li>id: " . $row['id'] . " " . "username: " . $row['username'] .   " " . "email: " . $row['email'] . "</li>";
-	}
-	echo "</ol>";
-
-}
-else {
-	echo "<p>Result is zero</p>";
-}
-
-
-$conn -> close();
-
-
-	?>
+	
 
 	</form>
 	
